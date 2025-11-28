@@ -1,8 +1,6 @@
 package com.ldb.bbzz.security.entity
 
 import io.hypersistence.tsid.TSID
-import io.hypersistence.utils.hibernate.id.Tsid
-import io.hypersistence.utils.hibernate.id.TsidGenerator
 import jakarta.persistence.CascadeType
 import jakarta.persistence.Column
 import jakarta.persistence.Entity

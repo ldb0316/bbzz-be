@@ -2,7 +2,6 @@ package com.ldb.bbzz.security
 
 import com.ldb.bbzz.security.entity.UserInfo
 import org.springframework.security.core.GrantedAuthority
-import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 
 class CustomUserDetails(private val userInfo: UserInfo) : UserDetails {

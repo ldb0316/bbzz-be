@@ -17,7 +17,7 @@ import java.time.Instant
 @EntityListeners(AuditingEntityListener::class)
 @Table(name = "user_role", schema = "public")
 @IdClass(UserRoleId::class)
-open class UserRole (
+class UserRole (
     @Id
     @Column(name="user_tsid", nullable = false, columnDefinition = "CHAR(13)")
      var userTsid: String,
