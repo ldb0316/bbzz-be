@@ -1,6 +1,6 @@
-package com.ldb.bbzz.security
+package com.ldb.bbzz.security.config
 
-import com.ldb.bbzz.security.service.CustomUserDetailsService
+import com.ldb.bbzz.security.config.service.CustomUserDetailsService
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationManager
@@ -36,6 +36,7 @@ class SecurityConfig(private val customUserDetailsService : CustomUserDetailsSer
         http.csrf { it.disable() }
             .authorizeHttpRequests {
                 it.requestMatchers("/auth/**").permitAll()
+                it.requestMatchers("/sign/**").permitAll()
                 it.anyRequest().authenticated()
             }
         return http.build()

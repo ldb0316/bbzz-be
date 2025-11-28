@@ -1,4 +1,4 @@
-package com.ldb.bbzz.security.dto
+package com.ldb.bbzz.security.auth.dto
 
 data class AuthResponseDto(
     val token: String,

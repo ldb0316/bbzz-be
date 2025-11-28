@@ -1,4 +1,4 @@
-package com.ldb.bbzz.security.repository
+package com.ldb.bbzz.security.auth.repository
 
 import com.ldb.bbzz.security.entity.UserInfo
 import org.springframework.data.jpa.repository.JpaRepository

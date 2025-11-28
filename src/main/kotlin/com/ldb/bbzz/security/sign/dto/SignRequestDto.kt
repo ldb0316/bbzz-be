@@ -1,4 +1,4 @@
-package com.ldb.bbzz.security.dto
+package com.ldb.bbzz.security.sign.dto
 
 data class SignRequestDto(
     val userId: String,

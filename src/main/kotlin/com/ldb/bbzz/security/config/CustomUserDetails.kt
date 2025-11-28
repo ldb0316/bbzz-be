@@ -1,4 +1,4 @@
-package com.ldb.bbzz.security
+package com.ldb.bbzz.security.config
 
 import com.ldb.bbzz.security.entity.UserInfo
 import org.springframework.security.core.GrantedAuthority

@@ -1,7 +1,7 @@
-package com.ldb.bbzz.security.service
+package com.ldb.bbzz.security.config.service
 
-import com.ldb.bbzz.security.CustomUserDetails
-import com.ldb.bbzz.security.repository.UserInfoRepository
+import com.ldb.bbzz.security.config.CustomUserDetails
+import com.ldb.bbzz.security.auth.repository.UserInfoRepository
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException

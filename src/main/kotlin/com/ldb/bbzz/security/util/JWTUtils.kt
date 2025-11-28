@@ -16,6 +16,9 @@ class JWTUtils {
     val publicKey: PublicKey = KeyFactory.getInstance("RSA").generatePublic(X509EncodedKeySpec(Base64.getDecoder().decode(System.getenv("PUBLIC_KEY"))))
     val privateKey: PrivateKey = KeyFactory.getInstance("RSA").generatePrivate(PKCS8EncodedKeySpec(Base64.getDecoder().decode(System.getenv("PRIVATE_KEY"))))
 
+    /**
+     * JWT Token 생성
+     */
     fun generateToken(username: String): String {
         return Jwts.builder()
             .setSubject(username)
