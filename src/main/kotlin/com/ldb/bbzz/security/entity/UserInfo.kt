@@ -19,7 +19,7 @@ import java.time.Instant
 open class UserInfo protected constructor() {
     @Id
 //    @Tsid
-    @Column(name = "user_tsid", nullable = false, columnDefinition = "CHAR(13)")
+    @Column(name = "user_tsid", nullable = false, columnDefinition = "BPCHAR(13)")
     lateinit var userTsid: String
 
     @Column(name = "user_id", length = 20)

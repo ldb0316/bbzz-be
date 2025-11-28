@@ -19,7 +19,7 @@ import java.time.Instant
 @IdClass(UserRoleId::class)
 class UserRole (
     @Id
-    @Column(name="user_tsid", nullable = false, columnDefinition = "CHAR(13)")
+    @Column(name="user_tsid", nullable = false, columnDefinition = "BPCHAR(13)")
      var userTsid: String,
 
     @Id
