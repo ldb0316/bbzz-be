@@ -15,7 +15,7 @@ class SignService(private val userInfoRepository: UserInfoRepository, private va
      * @param com.ldb.bbzz.security.sign.dto.SignRequestDto
      */
     fun signup(signRequestDto : SignRequestDto) {
-        val userInfo : UserInfo = UserInfo.Companion.builder().userId(signRequestDto.userId).userName(signRequestDto.userName).userPassword(passwordEncoder.encode(signRequestDto.userPassword)).build()
+        val userInfo : UserInfo = UserInfo.builder().userId(signRequestDto.userId).userName(signRequestDto.userName).userPassword(passwordEncoder.encode(signRequestDto.userPassword)).build()
 
         signRequestDto.userRoles.forEach { r ->
             val role = UserRole(userTsid = userInfo.userTsid, userRole = r.userRole, userInfo = userInfo)

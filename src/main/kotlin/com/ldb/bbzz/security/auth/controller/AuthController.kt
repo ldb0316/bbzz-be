@@ -1,12 +1,8 @@
 package com.ldb.bbzz.security.auth.controller
 
-import com.ldb.bbzz.security.config.service.CustomUserDetailsService
 import com.ldb.bbzz.security.auth.dto.AuthRequestDto
 import com.ldb.bbzz.security.auth.dto.AuthResponseDto
 import com.ldb.bbzz.security.auth.service.AuthService
-import com.ldb.bbzz.security.util.JWTUtils
-import org.springframework.security.authentication.AuthenticationManager
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.web.bind.annotation.GetMapping
