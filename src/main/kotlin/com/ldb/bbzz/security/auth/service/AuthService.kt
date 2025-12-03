@@ -2,7 +2,6 @@ package com.ldb.bbzz.security.auth.service
 
 import com.ldb.bbzz.common.caching.service.RedisService
 import com.ldb.bbzz.security.auth.dto.AuthRequestDto
-import com.ldb.bbzz.security.auth.dto.AuthResponseDto
 import com.ldb.bbzz.security.config.service.CustomUserDetailsService
 import com.ldb.bbzz.security.util.JWTUtils
 import org.springframework.security.authentication.AuthenticationManager

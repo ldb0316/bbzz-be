@@ -1,7 +1,6 @@
 package com.ldb.bbzz.common.caching.service
 
 import com.ldb.bbzz.security.auth.dto.UserRoleCacheDto
-import com.ldb.bbzz.security.entity.UserInfo
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.stereotype.Service

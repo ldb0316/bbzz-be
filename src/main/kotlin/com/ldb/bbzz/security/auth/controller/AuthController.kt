@@ -3,14 +3,10 @@ package com.ldb.bbzz.security.auth.controller
 import com.ldb.bbzz.common.caching.service.RedisService
 import com.ldb.bbzz.security.auth.dto.AuthRequestDto
 import com.ldb.bbzz.security.auth.dto.AuthResponseDto
-import com.ldb.bbzz.security.auth.dto.UserRoleCacheDto
 import com.ldb.bbzz.security.auth.service.AuthService
 import jakarta.servlet.http.Cookie
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.http.ResponseEntity
-import org.springframework.security.core.context.SecurityContextHolder
-import org.springframework.security.core.userdetails.UserDetails
-import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -19,8 +15,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/auth")
 class AuthController(
-    private val authService: AuthService,
-    private val redisService: RedisService
+    private val authService: AuthService
 ) {
 
 //    @GetMapping("/redis")
