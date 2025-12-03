@@ -1,8 +1,13 @@
 package com.ldb.bbzz.security.auth.controller
 
+import com.ldb.bbzz.common.caching.service.RedisService
 import com.ldb.bbzz.security.auth.dto.AuthRequestDto
 import com.ldb.bbzz.security.auth.dto.AuthResponseDto
+import com.ldb.bbzz.security.auth.dto.UserRoleCacheDto
 import com.ldb.bbzz.security.auth.service.AuthService
+import jakarta.servlet.http.Cookie
+import jakarta.servlet.http.HttpServletResponse
+import org.springframework.http.ResponseEntity
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.web.bind.annotation.GetMapping
@@ -14,21 +19,29 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/auth")
 class AuthController(
-    private val authService: AuthService
+    private val authService: AuthService,
+    private val redisService: RedisService
 ) {
 
-    @GetMapping("/me")
-    fun me(): Map<String, Any> {
-        val auth = SecurityContextHolder.getContext().authentication
-        val principal = auth?.principal as? UserDetails ?: return mapOf("error" to "User not authenticated")
-        return mapOf(
-            "username" to principal.username,
-            "userId" to principal.authorities.joinToString(","),
-        )
-    }
+//    @GetMapping("/redis")
+//    fun redis(): ResponseEntity<List<UserRoleCacheDto>> {
+//        val roles = redisService.getUserRoles("ldb9060")
+//        return ResponseEntity.ok(roles)
+//    }
 
     @PostMapping("/login")
-    fun login(@RequestBody authRequestDto: AuthRequestDto): AuthResponseDto {
-        return authService.login(authRequestDto)
+    fun login(@RequestBody authRequestDto: AuthRequestDto, response: HttpServletResponse): ResponseEntity<AuthResponseDto> {
+        val userId: String = authService.login(authRequestDto)
+        val accessToken: String = authService.generateAccessToken(userId)
+        val refreshToken: String = authService.generateRefreshToken(userId)
+        val cookie = Cookie("refreshToken", refreshToken)
+        cookie.path = "/"
+        cookie.isHttpOnly = true
+        cookie.secure = true
+        cookie.maxAge = 7*24*60*60
+        response.addCookie(cookie)
+
+        return ResponseEntity.ok(AuthResponseDto(accessToken))
+
     }
 }
