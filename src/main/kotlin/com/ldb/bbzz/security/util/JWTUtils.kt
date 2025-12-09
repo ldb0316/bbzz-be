@@ -1,6 +1,11 @@
 package com.ldb.bbzz.security.util
 
+import io.jsonwebtoken.Claims
+import io.jsonwebtoken.ExpiredJwtException
+import io.jsonwebtoken.JwtException
 import io.jsonwebtoken.Jwts
+import jakarta.servlet.http.HttpServletRequest
+import org.springframework.security.core.Authentication
 import org.springframework.stereotype.Component
 import java.security.KeyFactory
 import java.security.PrivateKey
@@ -19,9 +24,12 @@ class JWTUtils {
     /**
      * JWT Access Token 생성
      */
-    fun generateAccessToken(username: String): String {
+    fun generateAccessToken(authentication: Authentication): String {
+        //TODO claims에 userRoles 추가
         return Jwts.builder()
-            .setSubject(username)
+            .setSubject(authentication.name)
+            .addClaims(mapOf("roles" to authentication.authorities.map { it.authority }))
+            .setIssuer("bbzz")
             .setIssuedAt(Date())
             .setExpiration(Date(System.currentTimeMillis() + 1000 * 60 * 5)) // 5분
             .signWith(privateKey)
@@ -31,20 +39,30 @@ class JWTUtils {
     /**
      * JWT Refresh Token 생성
      */
-    fun generateRefreshToken(username: String): String {
+    fun generateRefreshToken(authentication: Authentication): String {
         return Jwts.builder()
-            .setSubject(username)
+            .setSubject(authentication.name)
+            .addClaims(mapOf("roles" to authentication.authorities.map { it.authority }))
+            .setIssuer("bbzz")
             .setIssuedAt(Date())
             .setExpiration(Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24)) // 24시간
             .signWith(privateKey)
             .compact()
     }
 
-    fun getUserIdFromToken(token: String): String {
+    fun getTokenFromHeader(request: HttpServletRequest) : String? {
+        val bearerToken = request.getHeader("Authorization")
+        if(bearerToken != null && bearerToken.startsWith("Bearer ")) {
+            return bearerToken.substring(7)
+        }
+        return null
+    }
+
+    fun getClaimsFromToken(token: String): Claims {
         return Jwts.parserBuilder()
             .setSigningKey(publicKey)
+            .requireIssuer("bbzz")
             .build()
-            .parseClaimsJws(token)
-            .body.subject
+            .parseClaimsJws(token).body
     }
 }

@@ -35,7 +35,7 @@ open class UserInfo protected constructor() {
     @Column(name = "reg_date")
     var regDate: Instant? = null
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = [CascadeType.ALL], mappedBy = "userInfo")
+    @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL], mappedBy = "userInfo")
     var userRoles: MutableList<UserRole> = mutableListOf()
 
 

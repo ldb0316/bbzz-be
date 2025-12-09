@@ -5,6 +5,7 @@ import com.ldb.bbzz.security.auth.service.AuthService
 import jakarta.servlet.http.Cookie
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.http.ResponseEntity
+import org.springframework.security.core.Authentication
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -24,9 +25,9 @@ class AuthController(
 
     @PostMapping("/login")
     fun login(@RequestBody authRequestDto: AuthRequestDto, response: HttpServletResponse): ResponseEntity<AuthResponseDto> {
-        val userId: String = authService.login(authRequestDto)
-        val accessToken: String = authService.generateAccessToken(userId)
-        val refreshToken: String = authService.generateRefreshToken(userId)
+        val authentication: Authentication = authService.login(authRequestDto)
+        val accessToken: String = authService.generateAccessToken(authentication)
+        val refreshToken: String = authService.generateRefreshToken(authentication)
         val cookie = Cookie("refreshToken", refreshToken)
         cookie.path = "/"
         cookie.isHttpOnly = true
