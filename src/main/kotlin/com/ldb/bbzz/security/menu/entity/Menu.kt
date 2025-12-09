@@ -4,9 +4,12 @@ import io.hypersistence.utils.hibernate.id.Tsid
 import jakarta.persistence.*
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
+import org.springframework.data.annotation.CreatedDate
+import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import java.time.Instant
 
 @Entity
+@EntityListeners(AuditingEntityListener::class)
 @Table(name = "menu", schema = "public")
 class Menu {
     @Id
@@ -49,6 +52,7 @@ class Menu {
     var delYn: String = "N"
 
     @NotNull
+    @CreatedDate
     @Column(name = "reg_dt", nullable = false)
     var regDt: Instant? = null
 

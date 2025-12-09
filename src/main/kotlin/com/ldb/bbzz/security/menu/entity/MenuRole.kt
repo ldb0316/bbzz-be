@@ -1,11 +1,9 @@
 package com.ldb.bbzz.security.menu.entity
 
 import jakarta.persistence.*
-import org.springframework.data.jpa.domain.support.AuditingEntityListener
 
 @Entity
 @Table(name = "menu_role", schema = "public")
-@EntityListeners(AuditingEntityListener::class)
 @IdClass(MenuRoleId::class)
 class MenuRole(
     @Id
