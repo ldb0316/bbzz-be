@@ -16,7 +16,7 @@ import java.time.Instant
 @Entity
 @EntityListeners(AuditingEntityListener::class)
 @Table(name = "user_info", schema = "public")
-open class UserInfo protected constructor() {
+class UserInfo protected constructor() {
     @Id
 //    @Tsid
     @Column(name = "user_tsid", nullable = false, columnDefinition = "BPCHAR(13)")

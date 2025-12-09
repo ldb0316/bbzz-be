@@ -7,7 +7,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener
 @Table(name = "menu_role", schema = "public")
 @EntityListeners(AuditingEntityListener::class)
 @IdClass(MenuRoleId::class)
-open class MenuRole(
+class MenuRole(
     @Id
     @Column(name = "menu_tsid", nullable = false, columnDefinition = "BPCHAR(13)")
     var menuTsid: String,

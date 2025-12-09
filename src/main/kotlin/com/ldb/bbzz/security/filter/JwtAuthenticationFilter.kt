@@ -23,8 +23,6 @@ class JwtAuthenticationFilter(
         filterChain: FilterChain
     ) {
         val bearerToken:String? = jwtUtils.getTokenFromHeader(request)
-        bearerToken
-
         bearerToken?.let {
             // TODO token expired 확인해서 refesh 로직추가
 

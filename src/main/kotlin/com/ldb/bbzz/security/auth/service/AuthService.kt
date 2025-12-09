@@ -4,24 +4,15 @@ import com.ldb.bbzz.common.caching.service.RedisService
 import com.ldb.bbzz.security.auth.dto.AuthRequestDto
 import com.ldb.bbzz.security.config.service.CustomUserDetailsService
 import com.ldb.bbzz.security.util.JWTUtils
-import org.springframework.security.authentication.AccountExpiredException
 import org.springframework.security.authentication.AuthenticationManager
-import org.springframework.security.authentication.BadCredentialsException
-import org.springframework.security.authentication.CredentialsExpiredException
-import org.springframework.security.authentication.DisabledException
-import org.springframework.security.authentication.LockedException
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
-import org.springframework.security.core.AuthenticationException
-import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.stereotype.Service
 
 @Service
 class AuthService(
     private val authenticationManager: AuthenticationManager,
-    private val customUserDetailsService: CustomUserDetailsService,
     private val jwtUtil: JWTUtils,
-    private val redisService: RedisService
 ) {
 
     fun login(authRequestDto : AuthRequestDto) : Authentication {
