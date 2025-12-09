@@ -23,7 +23,6 @@ class JWTUtils {
      * JWT Access Token 생성
      */
     fun generateAccessToken(authentication: Authentication): String {
-        //TODO claims에 userRoles 추가
         return Jwts.builder()
             .setSubject(authentication.name)
             .addClaims(mapOf("roles" to authentication.authorities.map { it.authority }))

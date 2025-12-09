@@ -17,6 +17,7 @@ class MenuAuthorizationFilter(
         response: HttpServletResponse,
         filterChain: FilterChain
     ) {
+        //TODO redis 기반 캐싱 구현 필요
         val uri = request.requestURI.lowercase()
         val method = request.method.uppercase()
         val roles: List<MenuRole> = menuService.getMenuRoles(uri, method)
