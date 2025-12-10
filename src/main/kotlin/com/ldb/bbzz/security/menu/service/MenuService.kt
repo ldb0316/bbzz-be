@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service
 class MenuService(
     private val menuRepository: MenuRepository
 ) {
+    /**
+     * 메뉴 URL + HttpMethod 에서 요구하는 권한 목록을 불러온다(자동 캐싱 처리됨)
+     */
     @Cacheable("menuRoles", key="#menuUrl+':'+#menuMethod")
     fun getMenuRoles(menuUrl: String, menuMethod: String): List<MenuRoleRspnsDto> {
         val menu = menuRepository.findByMenuUrlAndMenuMethod(menuUrl, menuMethod).orElse(null)

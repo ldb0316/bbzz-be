@@ -52,6 +52,8 @@ class SecurityConfig(
 
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
+        // 순서
+        // jwtAuthenticationFilter -> authorizeHttpRequests -> menuAuthorizationFilter
         http.csrf { it.disable() }
             .authorizeHttpRequests {
                 it.requestMatchers("/auth/**").permitAll()

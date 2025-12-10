@@ -30,7 +30,9 @@ class JwtAuthenticationFilter(
 //            val customUserDetails = customUserDetailsService.loadUserByUsername(claims.subject)
             val roles = claims["roles"] as? List<*>
             val authorities = roles?.mapNotNull{ item -> item as String}?.map { authority -> CustomGrantedAuthority(authority) }.orEmpty()
+            // authorities는 비어있어도 인증된 사용자로 판단함
             val auth = UsernamePasswordAuthenticationToken(claims.subject, null, authorities)
+            // 인증 정보 할당
             SecurityContextHolder.getContext().authentication = auth
         }
         filterChain.doFilter(request, response)
