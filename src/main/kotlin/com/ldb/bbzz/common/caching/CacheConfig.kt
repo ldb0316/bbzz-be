@@ -19,16 +19,18 @@ import tools.jackson.databind.jsontype.BasicPolymorphicTypeValidator
 class CacheConfig {
 
     @Bean
-    fun jsonMapper(): JsonMapper {
+    fun jsonMapper(): JsonMapper { // Jackson3에서는 ObjectMapper대신 JsonMapper를 사용한다.
+        //PolymorphicTypeValidator 기반으로 별도 커스텀 타입 설정이 없으면 Spring Security 타입만 기본 허용된다.
         val typeValidatorBuilder: BasicPolymorphicTypeValidator.Builder? =
             BasicPolymorphicTypeValidator.builder()
 //                .allowIfSubType(Object::class.java)
-                .allowIfSubType("com.ldb.bbzz.security.menu.dto")
+                .allowIfSubType("com.ldb.bbzz.security.menu.dto") // 단일 클래스, 패키지 경로, Object 지정을 통한 전체 허용 등 설정 가능
         return JsonMapper.builder().addModules(SecurityJacksonModules.getModules(this::class.java.classLoader, typeValidatorBuilder)).build()
     }
 
     @Bean
     fun redisCacheConfiguration(): RedisCacheConfiguration {
+        //boot4 + Jackson3에서는 GenericJacksonJsonRedisSerializer를 사용한다(Jackson2 X)
         return RedisCacheConfiguration.defaultCacheConfig().serializeValuesWith(
             RedisSerializationContext.SerializationPair.fromSerializer(
                 GenericJacksonJsonRedisSerializer(jsonMapper())
