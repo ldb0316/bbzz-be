@@ -23,6 +23,7 @@ repositories {
 dependencies {
 //    implementation("io.hypersistence:hypersistence-tsid:2.1.4")
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
+    implementation("org.springframework.boot:spring-boot-starter-cache")
     implementation("io.hypersistence:hypersistence-utils-hibernate-71:3.12.0")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-security")

@@ -1,6 +1,6 @@
 package com.ldb.bbzz.security.filter
 
-import com.ldb.bbzz.security.menu.entity.MenuRole
+import com.ldb.bbzz.security.menu.dto.MenuRoleRspnsDto
 import com.ldb.bbzz.security.menu.service.MenuService
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
@@ -17,10 +17,9 @@ class MenuAuthorizationFilter(
         response: HttpServletResponse,
         filterChain: FilterChain
     ) {
-        //TODO redis 기반 캐싱 구현 필요
         val uri = request.requestURI.lowercase()
         val method = request.method.uppercase()
-        val roles: List<MenuRole> = menuService.getMenuRoles(uri, method)
+        val roles: List<MenuRoleRspnsDto> = menuService.getMenuRoles(uri, method)
         val requiredRoles = roles.map { it.menuRole }
         val authentication = SecurityContextHolder.getContext().authentication
         val userRoles = authentication?.authorities?.map { it.authority }.orEmpty() // 사용자 권한이 없으면 빈 List 반환
